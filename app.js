@@ -1,1 +1,19 @@
-const h1 = <h1>Hello, React!</h1>;
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import animals from './animals';
+
+const container = document.getElementById('app');
+
+const root = createRoot(container);
+
+const title = '';
+
+const animalFacts = <h1>{title === '' ? 'Click an animal for a fun fact' : title}</h1>;
+
+root.render(
+  <div>
+    {animalFacts}
+  </div>
+);
+
+
