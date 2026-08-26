@@ -431,3 +431,36 @@ const listItems = strings.map(string => <li>{string}</li>);
 <ul>{listItems}</ul>
 
 ```
+
+* components
+
+```
+function MyComponent() {
+  return <h1>Hello, I'm a functional React Component!</h1>;
+}
+
+export default MyComponent;
+
+```
+
+
+> App.js file is the top level of your application, we have to export it to index.js to render., and index.js is the entry point.
+
+index.js
+```
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import MyComponent from './App';
+
+```
+
+app.js
+```
+import React from 'react';
+
+function MyComponent() {
+  return <h1>Hello, this is a function component body.</h1>;
+}
+
+export default MyComponent;
+```
