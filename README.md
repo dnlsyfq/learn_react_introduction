@@ -464,3 +464,262 @@ function MyComponent() {
 
 export default MyComponent;
 ```
+```
+// This is fine in JSX, not in an explicit array:
+<ul>
+  <li>item 1</li>
+  <li>item 2</li>
+  <li>item 3</li>
+</ul>
+
+// This is also fine!
+const liArray = [
+  <li>item 1</li>, 
+  <li>item 2</li>, 
+  <li>item 3</li>
+];
+
+<ul>{liArray}</ul>
+
+```
+
+```
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+
+const container = document.getElementById('app');
+const root = createRoot(container);
+const people = ['Rowe', 'Prevost', 'Gare'];
+
+const peopleList = people.map((person,i) =>
+  // expression goes here:
+  <li>{person}</li>
+);
+
+// root.render goes here:
+root.render(<ul>{peopleList}</ul>);
+```
+
+* keys
+A key is a JSX attribute. The attribute’s name is key. The attribute’s value should be something unique, similar to an id attribute
+keys don’t do anything visible! React uses them internally to keep track of lists. If you don’t use keys when you’re supposed to, React might accidentally scramble your list items into the wrong order.
+```
+<ul>
+  <li key="li-01">Example1</li>
+  <li key="li-02">Example2</li>
+  <li key="li-03">Example3</li>
+</ul>
+
+```
+
+```
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+
+const container = document.getElementById('app');
+const root = createRoot(container);
+const people = ['Rowe', 'Prevost', 'Gare'];
+
+const peopleList = people.map((person,i) =>
+  // expression goes here:
+  <li key={'person_' + i}>{person}</li>
+);
+
+// root.render goes here:
+root.render(<ul>{peopleList}</ul>);
+```
+
+* react methods - .createElement
+
+```
+// JSX
+const h1 = <h1>Hello world</h1>;
+
+
+
+// WO JSX
+const h1 = React.createElement(
+  "h1",
+  null,
+  "Hello world"
+);
+
+
+```
+
+* Advanced JSX
+```
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+
+const container = document.getElementById('app');
+const root = createRoot(container);
+const people = ['Rowe', 'Prevost', 'Gare'];
+
+const peopleList = people.map((person,i) =>
+  // expression goes here:
+  <li key={'person_' + i}>{person}</li>
+);
+
+// root.render goes here:
+root.render(<ul>{peopleList}</ul>);
+```
+
+* Nested JSX 
+```
+const myClasses = (
+  <a href="https://www.codecademy.com">
+    <h1>
+      Sign Up!
+    </h1>
+  </a>
+);
+```
+
+* JSX root
+```
+
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+ 
+const container = document.getElementById('app');
+const root = createRoot(container);
+root.render(<h1>Render me!</h1>);
+```
+
+* JSX Attributes
+```
+const example = <h1 id="example">JSX Attributes</h1>;
+
+const introClass = "introduction";
+const introParagraph = <p className={introClass}>Hello world</p>;
+```
+
+* JSX className
+```
+// When rendered, this JSX expression...
+const heading = <h1 className="large-heading">Codecademy</h1>;
+
+// ...will be rendered as this HTML
+<h1 class="large-heading">Codecademy</h1>
+```
+
+* JSX Conditionals
+
+
+In JSX, && is commonly used to render an element based on a boolean condition. && works best in conditionals that will sometimes do an action, but other times do nothing at all.
+
+If the expression on the left of the && evaluates as true, then the JSX on the right of the && will be rendered. If the first expression is false, however, then the JSX to the right of the && will be ignored and not rendered.
+```
+// If baby is false and age is above 25,
+// all list items will display.
+// Otherwise, only items meeting their conditions will show.
+const tasty = (
+  <ul>
+    <li>Applesauce</li>
+    { !baby && <li>Pizza</li> }
+    { age > 15 && <li>Brussels Sprouts</li> }
+    { age > 20 && <li>Oysters</li> }
+    { age > 25 && <li>Grappa</li> }
+  </ul>
+);
+```
+
+```
+// Using ternary operator
+const headline = (
+  <h1>
+    { age >= drinkingAge ? 'Buy Drink' : 'Do Teen Stuff' }
+  </h1>
+);
+
+// Using if/else outside of JSX 
+let text;
+
+if (age >= drinkingAge) { text = 'Buy Drink' }
+else { text = 'Do Teen Stuff' }
+
+const headline = <h1>{ text }</h1>
+
+// Using && operator. Renders as empty div if length is 0
+const unreadMessages = [ 'hello?', 'remember me!'];
+
+const update = (
+  <div>
+    {unreadMessages.length > 0 &&
+      <h1>
+        You have {unreadMessages.length} unread messages.
+      </h1>
+    }
+  </div>
+);
+```
+
+* JS in JSX
+```
+<p>{ Math.random() }</p>
+
+// Above JSX will be rendered something like this: 
+<p>0.88</p>
+```
+
+* JSX Event Listeners
+```
+// Basic example
+const handleClick = () => alert("Hello world!");
+
+const button = <button onClick={handleClick}>Click here</button>;
+
+// Example with event parameter
+const handleMouseOver = (event) => event.target.style.color = 'purple';
+
+const button2 = <div onMouseOver={handleMouseOver}>Drag here to change color</div>;
+```
+
+
+* JSX Methods
+```
+const strings = ['Home', 'Shop', 'About Me'];
+
+const listItems = strings.map(string => <li>{string}</li>);
+
+<ul>{listItems}</ul>
+
+```
+
+* JSX Syntax
+```
+<br />
+<img src="example_url" />
+```
+
+
+* React.createElement
+```
+// The following JSX...
+const h1 = <h1 className="header">Hello world</h1>;
+
+// ...will be compiled to the following:
+const h1 = React.createElement(
+  'h1',
+  {
+    className: 'header',
+  },
+  'Hello world'
+);
+
+```
+
+* React Components
+
+```
+import { createRoot } from 'react-dom/client';
+
+function MyComponent(){
+    return <h1>Hello world</h1>;
+}
+
+createRoot(document.getElementById('app')).render(<MyComponent />);
+
+
+```
